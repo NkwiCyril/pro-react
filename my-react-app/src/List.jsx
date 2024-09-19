@@ -8,5 +8,3 @@ function List() {
 } 
 
 export default List;
-
-// 1:18:42
