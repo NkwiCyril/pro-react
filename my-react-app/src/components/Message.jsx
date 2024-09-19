@@ -1,4 +1,5 @@
 import React from "react";
+import Counter from "./Counter";
 
 class Message extends React.Component {
   constructor(props) {
@@ -22,7 +23,7 @@ class Message extends React.Component {
 
   changeCount() {
     this.setState((prevState) => ({      
-      count: prevState.count >= 12 ? prevState.count * 2 : prevState.count + 1,  
+      count: prevState.count >= 5 ? prevState.count * 2 : prevState.count + 1,  
     }
   ));
   }
@@ -31,7 +32,7 @@ class Message extends React.Component {
     if (!this.state.isSubscribed) {
       return (
         <div>
-          <h1>Welcome Mme! x{this.state.count}</h1>
+          <Counter count={this.state.count}/>
           <h2>A subscription will be of great help to me 😊</h2>
           <button onClick={this.handleChange}>{this.state.text}</button>
           <button onClick={this.changeCount}>Greet me again!</button>
