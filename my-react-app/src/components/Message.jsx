@@ -8,11 +8,14 @@ class Message extends React.Component {
     this.state = {
       isSubscribed: false,
       text: "Subscribe",
-      count: 0
+      count: 0,
     };
     this.handleChange = this.handleChange.bind(this);
-    this.changeCount = this.changeCount.bind(this);
+    this.increment = this.increment.bind(this);
+    this.decrement = this.decrement.bind(this);
   }
+
+  // never modify state directly
 
   handleChange() {
     this.setState((prevState) => ({
@@ -21,27 +24,37 @@ class Message extends React.Component {
     }));
   }
 
-  changeCount() {
-    this.setState((prevState) => ({      
-      count: prevState.count >= 5 ? prevState.count * 2 : prevState.count + 1,  
-    }
-  ));
+  increment() {
+    this.setState((prevState) => ({
+      count: prevState.count + 1,
+    }));
+  }
+
+  decrement() {
+    this.setState((prevState) => ({
+      count: prevState.count - 1,
+    }));
   }
 
   render() {
     if (!this.state.isSubscribed) {
       return (
         <div>
-          <Counter count={this.state.count}/>
-          <h2>A subscription will be of great help to me 😊</h2>
+          <Counter count={this.state.count} />
+          <h2>A subscription will be of great help to me</h2>
           <button onClick={this.handleChange}>{this.state.text}</button>
-          <button onClick={this.changeCount}>Greet me again!</button>
+          <button type="button" onClick={this.increment}>
+            Greet me again!
+          </button>
+          <button type="button" onClick={this.decrement}>
+            Don't greet
+          </button>
         </div>
       );
     } else {
       return (
         <div>
-          <h1>Thank you for your subscription!! 🥳🥳</h1>
+          <h1>Thank you for your subscription!!</h1>
           <h2>There are a lot of videos in store for you.</h2>
           <button onClick={this.handleChange}>{this.state.text}</button>
         </div>
