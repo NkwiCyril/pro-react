@@ -46,19 +46,27 @@ class NoteApp extends Component {
         content: this.state.content,
         category: this.state.category,
       };
-      this.setState((prevState) =>({
-        notes: [...prevState.notes, newNote]
+      this.setState((prevState) => ({
+        notes: [...prevState.notes, newNote],
       }));
     }
   };
 
   // method to delete a note from the notes list
-  deleteNote = () => {};
+  deleteNote = (id) => {
+    this.setState((prevState) => ({
+      notes: prevState.notes.filter((note) => note.id !== id),
+    }));
+  };
 
   render() {
     const noteList = this.state.notes.map((note) => {
       return (
-        <Note key={note.id} content={note.content} category={note.category} />
+        <Note
+          key={note.id}
+          note={note}
+          handleDelete={this.deleteNote}
+        />
       );
     });
 
@@ -92,7 +100,7 @@ class NoteApp extends Component {
           <img src={logo} alt="note_pad_logo" />
         </div>
         <div className="form">
-          <form action="#">
+          <form>
             <Input value={this.state.content} handleInput={this.handleInput} />
             <select
               name="category"
