@@ -1,26 +1,15 @@
 import React from "react";
 import Button from "./Button";
 
-function Note() {
+function Note({ category, content, id }) {
   return (
-    <div class="note-card">
-      <p class="category">{}</p>
-      <div class="note-space">
-        <div class="content">{}</div>
-        <div class="buttons">
-          <a href="/edit/= note.id ">
-            <button class="edit-button">Edit</button>
-          </a>
-          <a href="/api/notes/delete/= note.id ">
-            <button class="delete-button">Delete</button>
-          </a>
-          <Button className={"edit-button"} href={""} name={"Edit"} type={""} />
-          <Button
-            className={"delete-button"}
-            href={""}
-            name={"Delete"}
-            type={""}
-          />
+    <div className="note-card">
+      <p className="category">{category}</p>
+      <div className="note-space">
+        <div className="content">{content}</div>
+        <div className="buttons">
+          <Button className={"edit-button"} name={"Edit"} type={""} />
+          <Button className={"delete-button"} name={"Delete"} type={""} />
         </div>
       </div>
     </div>

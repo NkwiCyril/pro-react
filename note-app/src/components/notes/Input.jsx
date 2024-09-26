@@ -1,6 +1,6 @@
 import React from "react";
 
-function Input({ name, value, handleInput }) {
+function Input({ value, handleInput }) {
   return (
     <>
       <input
@@ -9,6 +9,7 @@ function Input({ name, value, handleInput }) {
         value={value}
         placeholder="Type your note here"
         onChange={(event) => handleInput(event)}
+        required
       />
     </>
   );

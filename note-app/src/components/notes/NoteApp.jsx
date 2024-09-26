@@ -3,27 +3,66 @@ import logo from "../../assets/note_logo.jpg";
 import Input from "./Input";
 import Button from "./Button";
 import Note from "./Note";
-import CategorySelect from "./CategorySelect";
+import CategoryOption from "./CategoryOption";
 class NoteApp extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       content: "",
       category: "Category",
+      notes: [
+        {
+          id: 1,
+          content: "This is a sample note",
+          category: "Personal",
+        },
+        {
+          id: 2,
+          content: "Believe",
+          category: "Work",
+        },
+      ],
     };
   }
 
   handleInput = (event) => {
-    this.setState({});
+    this.setState({
+      content: event.target.value,
+    });
   };
 
   selectCategory = (event) => {
-    this.setState({ category: event.target.value });
+    this.setState({
+      category: event.target.value,
+    });
   };
 
+  // method to add a note to the notes list
+  addNote = (event) => {
+    event.preventDefault();
+    if (this.state.content != "" && this.state.category != "Category") {
+      const newNote = {
+        id: this.state.notes.length + 1,
+        content: this.state.content,
+        category: this.state.category,
+      };
+      this.setState((prevState) =>({
+        notes: [...prevState.notes, newNote]
+      }));
+    }
+  };
+
+  // method to delete a note from the notes list
+  deleteNote = () => {};
+
   render() {
-    let categories = [
+    const noteList = this.state.notes.map((note) => {
+      return (
+        <Note key={note.id} content={note.content} category={note.category} />
+      );
+    });
+
+    const categories = [
       { value: "", label: "Category" },
       { value: "Personal", label: "Personal" },
       { value: "Work", label: "Work" },
@@ -37,10 +76,14 @@ class NoteApp extends Component {
       { value: "Project", label: "Project" },
     ];
 
-    let categoryList = categories.map((category) => {
-      <option key={categories.indexOf(category)} value={category.value}>
-        {category.label}
-      </option>;
+    const categoryList = categories.map((category) => {
+      return (
+        <CategoryOption
+          key={categories.indexOf(category)}
+          categories={categories}
+          category={category}
+        />
+      );
     });
 
     return (
@@ -49,9 +92,8 @@ class NoteApp extends Component {
           <img src={logo} alt="note_pad_logo" />
         </div>
         <div className="form">
-          <form action="/api/notes" method="POST">
+          <form action="#">
             <Input value={this.state.content} handleInput={this.handleInput} />
-            {/* <CategorySelect categoryList={categoryList}/> */}
             <select
               name="category"
               id="category"
@@ -66,10 +108,10 @@ class NoteApp extends Component {
               type={"submit"}
               className={"add-button"}
               name={"Add"}
-              href={""}
+              handleClick={(event) => this.addNote(event)}
             />
           </form>
-          <div className="note-display">{/* <Note /> */}</div>
+          <div className="note-display">{noteList}</div>
         </div>
       </div>
     );

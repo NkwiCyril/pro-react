@@ -1,13 +1,11 @@
 import React from "react";
 
-function Button({ name, type, className, href }) {
+function Button({ name, type, className, handleClick }) {
   return (
     <>
-      <a href={href}>
-        <button type={type} className={className}>
-          {name}
-        </button>
-      </a>
+      <button type={type} className={className} onClick={event => handleClick(event)}>
+        {name}
+      </button>
     </>
   );
 }
