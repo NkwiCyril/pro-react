@@ -29,3 +29,5 @@ const UpdatedComponent = (WrappedComponent) => {
 
   return WithCounter;
 };
+
+export default UpdatedComponent;
