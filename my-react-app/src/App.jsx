@@ -1,6 +1,7 @@
 import Form from "./components/ControlledComponents/Form";
 import EventClass from "./components/EventClass";
 import FormApp from "./components/Form/FormApp";
+import Array from "./components/Hooks/Array";
 import Counter from "./components/Hooks/counter";
 import Object from "./components/Hooks/Object";
 import PostForm from "./components/HTTP/PostForm";
@@ -32,6 +33,7 @@ function App() {
       {/* HOOKS */}
       <Counter />
       <Object />
+      <Array />
     </div>
   );
 }
